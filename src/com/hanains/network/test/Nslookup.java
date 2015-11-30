@@ -18,7 +18,7 @@ public class Nslookup {
 //			}
 //			if("exit".equals(host)){
 //				break;
-//			}
+//			} 강사님
 			
 			InetAddress res = ns.getByName(host);
 			System.out.println(res.toString());
