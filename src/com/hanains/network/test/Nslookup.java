@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class Nslookup {
 	public static void main(String[] args) throws Exception{
-		InetAddress ns =null;
 		Scanner sc = new Scanner(System.in);
 		
 		while(true){
@@ -20,8 +19,12 @@ public class Nslookup {
 				break;
 			}//강사님꺼 
 
-			InetAddress res = ns.getByName(host);
-			System.out.println(res.toString());
+			InetAddress[] ns = InetAddress.getAllByName(host);
+			
+			for (int i = 0; i < ns.length; i++) {
+				System.out.println(ns[i].toString());
+			}
+			
 		}
 	}
 
