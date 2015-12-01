@@ -29,16 +29,16 @@ public class EchoClient {
 
 			is = sc.getInputStream(); os=sc.getOutputStream();
 
-	BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
-			
+			BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
+
 			os = sc.getOutputStream(); is = sc.getInputStream(); 
-			
+
 			PrintWriter pw = new PrintWriter(new OutputStreamWriter(os));
-			
+
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
-			
+
 			String data = null;
-			
+
 			while((data = keyboard.readLine())!=null){
 				if(data.equals("exit")) break;
 				pw.println(data);
@@ -46,12 +46,12 @@ public class EchoClient {
 				String echo = br.readLine();
 				System.out.println("echo:"+echo);
 			}
-			 
+
 			byte[] buffer = new byte[256];
 
-			
+
 			pw.close(); br.close();
-			
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
