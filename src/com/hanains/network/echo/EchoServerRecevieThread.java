@@ -1,8 +1,12 @@
 package com.hanains.network.echo;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 public class EchoServerRecevieThread extends Thread{
@@ -19,24 +23,20 @@ public class EchoServerRecevieThread extends Thread{
 	@Override
 	public void run(){
 		try {
-			is = sc.getInputStream(); os = sc.getOutputStream(); 
-			byte[] buffer = new byte[256];
+			os = sc.getOutputStream(); is = sc.getInputStream();
 			
-			while(true){
-				int readByteCnt = is.read(buffer);
-				if(readByteCnt < 0 ){
-					System.out.println("[서버]클라이언트로부터 연결 끊킴");
-					break;
-				}
-				
-				String data ="Hello";
-				os.write(data.getBytes("UTF-8"));
-				os.flush();
-				
-				data = new String(buffer, 0 , readByteCnt);
-				System.out.println("[서버]수신 데이터 : " + data);
+			PrintWriter pw = new PrintWriter(new OutputStreamWriter(os));
+			BufferedReader br = new BufferedReader(new InputStreamReader(is));
+			
+			String data = null;
+			
+			while((data = br.readLine())!=null){
+				System.out.println("클라이언트로 부터 전송 받은 문자열:"+data);
+				pw.println(data);
+				pw.flush();
 			}
-			
+			 
+			pw.close(); br.close();
 			is.close(); os.close();
 			
 		} catch (IOException e) {
