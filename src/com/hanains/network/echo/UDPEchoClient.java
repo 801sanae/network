@@ -2,7 +2,9 @@ package com.hanains.network.echo;
 
 /*
  * UDP 네트워킹
- * 
+ * 비연결 지향적 프로토콜
+ * 데이터 송수신간 연결 절차 없이 빠른 전송 가능
+ * 데이터 전달 신뢰성은 떨어짐
  */
 
 import java.net.DatagramPacket;
