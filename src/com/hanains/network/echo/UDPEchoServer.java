@@ -14,17 +14,17 @@ public class UDPEchoServer {
 
 
 		try{
+			
 			//1.UDP 소켓 생성
 			datagramSocket = new DatagramSocket(PORT);
 			//2.수신 대기 ( Packet 생성후 receive)
-
+			while(true){
 			log("수신대기");
 			DatagramPacket receivePacket = new DatagramPacket(new byte[BUFFER_SIZE], BUFFER_SIZE);
 			datagramSocket.receive(receivePacket);
 			
 //			//3.데이터 확인
 			String data = new String(receivePacket.getData(),0,receivePacket.getLength(),"UTF-8");
-			log("[Server]데이터 수신:" + data);
 
 			DatagramPacket sendPacket 
 			= new DatagramPacket(
@@ -35,6 +35,9 @@ public class UDPEchoServer {
 					);
 			datagramSocket.send(sendPacket);
 			
+			log("[Server]데이터 수신:" + data);
+			
+			}
 		}catch(Exception e){log("error:"+e);}
 		finally{
 			if (datagramSocket!=null) {
